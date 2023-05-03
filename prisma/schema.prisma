@@ -10,8 +10,16 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Package {
-  id String @id @default(cuid())
+model delivery {
+  id_delivery String @id @default(cuid())
+  id_user Int 
   name String
-  fragile String
+  fragile Boolean @default(false)
+}
+
+model delivery_item {
+  id_delivery_item String @id @default(cuid())
+  id_user Int 
+  delivery delivery @relation(fields: [delivery_id], references: [id_delivery])
+  delivery_id String
 }
